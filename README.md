@@ -94,7 +94,7 @@ $user->notify(new TestNotification());
 - Requires PHP 8.0 or above.
 
 ## Author
-Andreas Nilsson (<http://github.com/andreasnij>)
+Andreas Nilsson (<https://github.com/andreasnij>)
 
 ## License
 This software is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
