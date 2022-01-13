@@ -39,7 +39,7 @@ class ServiceProviderTest extends TestCase
 
     public function testSmsTransceiverIsRegisteredCorrectWithLogger()
     {
-        $this->app['config']['services.sms.log'] = true;
+        $this->app['config']['sms.log'] = true;
         $smsTransceiver = $this->app->make(SmsTransceiverInterface::class);
 
         $this->assertNotEmpty($this->getProtectedProperty($smsTransceiver, 'logger'));
@@ -47,7 +47,7 @@ class ServiceProviderTest extends TestCase
 
     public function testSmsTransceiverIsRegisteredCorrectWithDefaultFrom()
     {
-        $this->app['config']['services.sms.default_from'] = 'Testing';
+        $this->app['config']['sms.default_from'] = 'Testing';
         $smsTransceiver = $this->app->make(SmsTransceiverInterface::class);
 
         $this->assertNotEmpty($this->getProtectedProperty($smsTransceiver, 'defaultFrom'));
@@ -64,7 +64,7 @@ class ServiceProviderTest extends TestCase
         $this->app->instance(RequestFactoryInterface::class, $this->createMock(RequestFactoryInterface::class));
         $this->app->instance(StreamFactoryInterface::class, $this->createMock(StreamFactoryInterface::class));
 
-        $this->app['config']['services.sms'] = $gatewayConfig;
+        $this->app['config']['sms'] = $gatewayConfig;
         $smsTransceiver = $this->app->make(SmsTransceiverInterface::class);
 
         $this->assertInstanceOf($expectedGatewayClass, $this->getProtectedProperty($smsTransceiver, 'gateway'));

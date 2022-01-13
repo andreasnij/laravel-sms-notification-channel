@@ -4,13 +4,12 @@ An SMS notification channel for the PHP framework Laravel.
 
 Supported SMS gateways:
 
-|                                                   | Configuration gateway name | Required configuration keys                                                                                              | 
-|---------------------------------------------------|:---------------------------|:-------------------------------------------------------------------------------------------------------------------------|
-| [46elks](https://46elks.com/)                     | `forty_six_elks`           | `username`,  <br/>`password`                                                                                             |
-| [Cellsynt](https://www.cellsynt.com)              | `cellsynt`                 | `api_username`,  <br/>`api_password`                                                                                     |
-| [Telenor SMS Pro](https://www.smspro.se/)         | `telenor`                  | `username`, <br/>`password`,  <br/>`customer_id`,  <br/>`customer_password`                                              |
-| [Twilio](https://www.twilio.com)                  | `twilio`                   | `account_sid`, <br/>`auth_token`                                                                                         |
-| [Vonage (formerly Nexmo)](https://www.vonage.com) | `vonage`                   | `api_key`, <br/>`api_secret`                                                                                             |
+- [46elks](https://46elks.com/)                         
+- [Cellsynt](https://www.cellsynt.com)     
+- [Telenor SMS Pro](https://www.smspro.se/)   
+- [Twilio](https://www.twilio.com)     
+- [Vonage (formerly Nexmo)](https://www.vonage.com) 
+
 
 
 ## Installation
@@ -40,23 +39,13 @@ If you want to use the **Vonage** gateway you also need to install the Vonage cl
 $ composer require vonage/client-core
 ```
 
+Next you need to publish the configuration file to your config directory:
 
-
-Next you need to add the sms configuration to your `config/services.php` configuration file. Example:
-
-```php
-'sms' => [
-    'gateway' => 'forty_six_elks',
-    'username' => 'some username',
-    'password' => 'a password',
-    'log' => true,
-    'default_from' => 'App name'
-];
+```bash
+$ php artisan vendor:publish --provider="LaravelSmsNotificationChannel\ServiceProvider" --tag="config"
 ```
 
-Check the gateway table above to see which configuration keys your SMS gateway requires.
-
-
+Edit your `sms.php` configuration file to fit your application.
 
 ## Usage example
 ```php

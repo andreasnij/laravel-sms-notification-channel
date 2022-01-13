@@ -29,11 +29,11 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->app->singleton(SmsTransceiverInterface::class, function (Application $app) {
             $gateway = $this->createSmsGateway($app);
-            $logger = $app['config']['services.sms.log'] ? Log::driver() : null;
+            $logger = $app['config']['sms.log'] ? Log::driver() : null;
 
             $smsTransceiver = new SmsTransceiver($gateway, $logger);
 
-            if (($defaultFrom = $app['config']['services.sms.default_from'])) {
+            if (($defaultFrom = $app['config']['sms.default_from'])) {
                 $smsTransceiver->setDefaultFrom($defaultFrom);
             }
 
@@ -50,9 +50,14 @@ class ServiceProvider extends BaseServiceProvider
         });
     }
 
+    public function boot()
+    {
+        $this->publishes([ __DIR__.'/../config/sms.php' => config_path('sms.php')], 'config');
+    }
+
     private function createSmsGateway(Application $app): GatewayInterface
     {
-        if (!($gatewayName = $app['config']['services.sms.gateway'])) {
+        if (!($gatewayName = $app['config']['sms.gateway'])) {
             return new NullGateway();
         }
 
@@ -62,37 +67,37 @@ class ServiceProvider extends BaseServiceProvider
 
         return match ($gatewayName) {
             'cellsynt' => new CellsyntGateway(
-                $app['config']['services.sms.username'],
-                $app['config']['services.sms.password'],
+                $app['config']['sms.username'],
+                $app['config']['sms.password'],
                 $httpClient,
                 $requestFactory,
                 $streamFactory,
             ),
             'forty_six_elks' => new FortySixElksGateway(
-                $app['config']['services.sms.api_username'],
-                $app['config']['services.sms.api_password'],
+                $app['config']['sms.api_username'],
+                $app['config']['sms.api_password'],
                 $httpClient,
                 $requestFactory,
                 $streamFactory,
             ),
             'telenor' => new TelenorGateway(
-                $app['config']['services.sms.username'],
-                $app['config']['services.sms.password'],
-                $app['config']['services.sms.customer_id'],
-                $app['config']['services.sms.customer_password'],
-                $app['config']['services.sms.supplementary_information'],
+                $app['config']['sms.username'],
+                $app['config']['sms.password'],
+                $app['config']['sms.customer_id'],
+                $app['config']['sms.customer_password'],
+                $app['config']['sms.supplementary_information'],
                 $httpClient,
                 $requestFactory,
                 $streamFactory,
             ),
             'twilio' => new TwilioGateway(
-                $app['config']['services.sms.account_sid'],
-                $app['config']['services.sms.auth_token'],
+                $app['config']['sms.account_sid'],
+                $app['config']['sms.auth_token'],
                 $app->has(TwilioClient::class) ? $app->make(TwilioClient::class) : null,
             ),
             'vonage' => new VonageGateway(
-                $app['config']['services.sms.api_key'],
-                $app['config']['services.sms.api_secret'],
+                $app['config']['sms.api_key'],
+                $app['config']['sms.api_secret'],
                 $app->has(VonageClient::class) ? $app->make(VonageClient::class) : null,
             ),
             default => throw new \InvalidArgumentException("Unknown sms gateway \"{$gatewayName}\""),
