@@ -18,14 +18,16 @@ Add the package as a requirement to your `composer.json`:
 $ composer require andreasnij/laravel-sms-notification-channel
 ```
 
-If you don't already have a http library implementing PSR-7, PSR-17 and PSR-18 installed you
-need to add that to. For example:
+If you want to use the **46elks**, **Cellsynt** or **Telenor SMS Pro** gateway you also you need
+implementations of PSR-7: HTTP message interfaces, PSR-17: HTTP Factories and
+PSR-18: HTTP Client. A popular package for this is Guzzle. You can install it with:
+
 ```bash
 $ composer require guzzlehttp/guzzle:^7.0 guzzlehttp/psr7:^2.0
 ```
 
-To read more about this at [andreasnij/an-sms](https://github.com/andreasnij/an-sms), which 
-is the package used to send the sms behind the scenes. 
+You may choose to use any other implementations of the PSR interfaces though.
+
 
 If you want to use the **Twilio** gateway you also need to install the Twilio SDK:
 
