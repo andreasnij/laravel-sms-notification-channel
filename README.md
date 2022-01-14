@@ -24,7 +24,7 @@ need to add that to. For example:
 $ composer require guzzlehttp/guzzle:^7.0 guzzlehttp/psr7:^2.0
 ```
 
-To read more about this at [andreasnij/laravel-sms-notification-channel](https://github.com/andreasnij/an-sms), which 
+To read more about this at [andreasnij/an-sms](https://github.com/andreasnij/an-sms), which 
 is the package used to send the sms behind the scenes. 
 
 If you want to use the **Twilio** gateway you also need to install the Twilio SDK:
