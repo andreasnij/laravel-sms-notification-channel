@@ -49,6 +49,8 @@ $ php artisan vendor:publish --provider="LaravelSmsNotificationChannel\ServicePr
 
 Edit your `sms.php` configuration file to fit your application.
 
+
+
 ## Usage example
 ```php
 class TestUser 
@@ -79,6 +81,19 @@ class TestNotification extends Notification
 $user = new User();
 $user->notify(new TestNotification());
 ```
+
+You can also use this package to send sms manually (without notifications):
+
+```php
+use AnSms\SmsTransceiverInterface;
+use AnSms\Message\Message;
+
+$smsTransceiver = app(SmsTransceiverInterface::class);
+
+$message = Message::create('46700000000', 'Hello world!');
+$smsTransceiver->sendMessage($message);
+```
+
 
 
 ## Requirements
