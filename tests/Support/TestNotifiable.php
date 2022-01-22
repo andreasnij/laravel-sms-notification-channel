@@ -9,7 +9,7 @@ class TestNotifiable
 {
     use Notifiable;
 
-    public string $phone_number = '46700000002';
+    public ?string $phone_number = '46700000002';
 
     public function routeNotificationForSms(Notification $notification): ?string
     {

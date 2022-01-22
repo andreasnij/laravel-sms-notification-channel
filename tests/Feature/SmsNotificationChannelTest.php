@@ -70,4 +70,14 @@ class SmsNotificationChannelTest extends TestCase
 
         $notifiable->notify($notification);
     }
+
+    public function testWillNotSendMessageToEmpty(): void
+    {
+        $notifiable = new TestNotifiable();
+        $notifiable->phone_number = null;
+
+        $this->smsTransceiverMock->expects($this->never())->method('sendMessage');
+
+        $notifiable->notify(new TestNotificationWithString());
+    }
 }
