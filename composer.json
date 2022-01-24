@@ -44,6 +44,10 @@
             "LaravelSmsNotificationChannel\\Tests\\": "tests/"
         }
     },
+    "suggest": {
+        "twilio/sdk": "Required to use the Twilio gateway",
+        "vonage/client-core": "Required to use the Vonage gateway"
+    },
     "scripts": {
         "phpcs": "vendor/bin/phpcs",
         "phpunit": "vendor/bin/phpunit",
