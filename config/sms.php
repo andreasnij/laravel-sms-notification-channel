@@ -40,7 +40,7 @@ return [
     /*
      * If the sms package should log actions to the info log'
      */
-    'log' => env('SMS_LOG', false),
+    'log_channel' => env('SMS_LOG_CHANNEL'),
 
 
     /**

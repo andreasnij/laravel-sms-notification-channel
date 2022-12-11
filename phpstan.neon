@@ -4,5 +4,4 @@ parameters:
         - tests
     level: 5
     ignoreErrors:
-            - '#Call to an undefined static method Illuminate\\Support\\Facades\\Log::driver\(\)#'
             - '#Call to an undefined method Illuminate\\Notifications\\Notification::toSms\(\)#'

@@ -39,7 +39,7 @@ class ServiceProviderTest extends TestCase
 
     public function testSmsTransceiverIsRegisteredCorrectWithLogger()
     {
-        $this->app['config']['sms.log'] = true;
+        $this->app['config']['sms.log_channel'] = 'single';
         $smsTransceiver = $this->app->make(SmsTransceiverInterface::class);
 
         $this->assertNotEmpty($this->getProtectedProperty($smsTransceiver, 'logger'));

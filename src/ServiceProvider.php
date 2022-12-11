@@ -29,7 +29,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->app->singleton(SmsTransceiverInterface::class, function (Application $app) {
             $gateway = $this->createSmsGateway($app);
-            $logger = $app['config']['sms.log'] ? Log::driver() : null;
+            $logger = $app['config']['sms.log_channel'] ? Log::channel($app['config']['sms.log_channel']) : null;
 
             $smsTransceiver = new SmsTransceiver($gateway, $logger);
 
