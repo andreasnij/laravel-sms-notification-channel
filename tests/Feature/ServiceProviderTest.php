@@ -70,7 +70,7 @@ class ServiceProviderTest extends TestCase
         $this->assertInstanceOf($expectedGatewayClass, $this->getProtectedProperty($smsTransceiver, 'gateway'));
     }
 
-    public function gatewayDataProvider(): Generator
+    public static function gatewayDataProvider(): Generator
     {
         yield [CellsyntGateway::class, [
             'gateway' => 'cellsynt',
