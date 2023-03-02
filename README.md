@@ -1,5 +1,7 @@
 # Laravel SMS notification channel
 
+[![Version](http://img.shields.io/packagist/v/andreasnij/laravel-sms-notification-channel.svg?style=flat-square)](https://packagist.org/packages/andreasnij/laravel-sms-notification-channel)
+
 An SMS notification channel for the PHP framework Laravel.
 
 Supported SMS gateways:
