@@ -13,6 +13,7 @@ use Generator;
 use Illuminate\Notifications\ChannelManager;
 use LaravelSmsNotificationChannel\SmsNotificationChannel;
 use LaravelSmsNotificationChannel\Tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Psr\Http\Client\ClientInterface as HttpClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -53,9 +54,7 @@ class ServiceProviderTest extends TestCase
         $this->assertNotEmpty($this->getProtectedProperty($smsTransceiver, 'defaultFrom'));
     }
 
-    /**
-     * @dataProvider gatewayDataProvider
-     */
+    #[DataProvider('gatewayDataProvider')]
     public function testSmsTransceiverIsRegisteredWithCorrectGateway(
         string $expectedGatewayClass,
         array $gatewayConfig
