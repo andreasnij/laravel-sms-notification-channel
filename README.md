@@ -97,10 +97,6 @@ $smsTransceiver->sendMessage($message);
 ```
 
 
-
-## Requirements
-- Requires PHP 8.0 or above.
-
 ## Author
 Andreas Nilsson (<https://github.com/andreasnij>)
 
