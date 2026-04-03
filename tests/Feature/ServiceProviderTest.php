@@ -59,9 +59,9 @@ class ServiceProviderTest extends TestCase
         string $expectedGatewayClass,
         array $gatewayConfig
     ): void {
-        $this->app->instance(HttpClientInterface::class, $this->createMock(HttpClientInterface::class));
-        $this->app->instance(RequestFactoryInterface::class, $this->createMock(RequestFactoryInterface::class));
-        $this->app->instance(StreamFactoryInterface::class, $this->createMock(StreamFactoryInterface::class));
+        $this->app->instance(HttpClientInterface::class, $this->createStub(HttpClientInterface::class));
+        $this->app->instance(RequestFactoryInterface::class, $this->createStub(RequestFactoryInterface::class));
+        $this->app->instance(StreamFactoryInterface::class, $this->createStub(StreamFactoryInterface::class));
 
         $this->app['config']['sms'] = $gatewayConfig;
         $smsTransceiver = $this->app->make(SmsTransceiverInterface::class);

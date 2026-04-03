@@ -28,7 +28,7 @@ class SmsNotificationChannel
 
         try {
             $this->smsTransceiver->sendMessage($message);
-        } catch (SendException | InvalidArgumentException $exception) {
+        } catch (SendException $exception) {
             $this->dispatcher->dispatch(new NotificationFailed(
                 $notifiable,
                 $notification,

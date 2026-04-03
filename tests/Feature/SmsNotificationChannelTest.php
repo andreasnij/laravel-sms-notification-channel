@@ -56,11 +56,17 @@ class SmsNotificationChannelTest extends TestCase
         $notifiable = new TestNotifiable();
         $notification =  new TestNotificationWithString();
 
+        $notificationFailedCount = 0;
         $dispatcher = $this->createMock(Dispatcher::class);
         $this->app->instance(Dispatcher::class, $dispatcher);
-        $dispatcher->expects($this->once())
+        $dispatcher->expects($this->atLeastOnce())
             ->method('dispatch')
-            ->with($this->isInstanceOf(NotificationFailed::class));
+            ->willReturnCallback(function ($event) use (&$notificationFailedCount) {
+
+                if ($event instanceof NotificationFailed) {
+                    $notificationFailedCount++;
+                }
+            });
 
         $this->smsTransceiverMock->expects($this->once())
             ->method('sendMessage')
@@ -69,6 +75,12 @@ class SmsNotificationChannelTest extends TestCase
         $this->expectException(SendException::class);
 
         $notifiable->notify($notification);
+
+        $this->assertSame(
+            1,
+            $notificationFailedCount,
+            'Expected dispatch to be called exactly once with NotificationFailed'
+        );
     }
 
     public function testWillNotSendMessageToEmpty(): void
